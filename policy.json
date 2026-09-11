@@ -1,0 +1,130 @@
+{
+  "schema": 2,
+  "pack_name": "GreenCraft",
+  "pack_version": "2.0.0",
+  "known_good_minecraft": "26.2",
+  "minecraft_channel": "release",
+  "loader": "fabric",
+  "memory": {
+    "min_mb": 2048,
+    "max_mb": 8192
+  },
+  "graphics": {
+    "api": "OpenGL",
+    "shader_required": true,
+    "pbr_required": true,
+    "distant_horizons_enabled": false
+  },
+  "content": [
+    {
+      "slug": "fabric-api",
+      "kind": "mod",
+      "loader": "fabric",
+      "side": "both",
+      "gate": true
+    },
+    {
+      "slug": "iris",
+      "kind": "mod",
+      "loader": "fabric",
+      "side": "client",
+      "gate": true,
+      "resolve_first": true
+    },
+    {
+      "slug": "sodium",
+      "kind": "mod",
+      "loader": "fabric",
+      "side": "client",
+      "gate": true,
+      "managed_by": "iris_dependency"
+    },
+    {
+      "slug": "lithium",
+      "kind": "mod",
+      "loader": "fabric",
+      "side": "both",
+      "gate": true
+    },
+    {
+      "slug": "ferrite-core",
+      "kind": "mod",
+      "loader": "fabric",
+      "side": "both",
+      "gate": true
+    },
+    {
+      "slug": "immediatelyfast",
+      "kind": "mod",
+      "loader": "fabric",
+      "side": "client",
+      "gate": true
+    },
+    {
+      "slug": "dynamic-fps",
+      "kind": "mod",
+      "loader": "fabric",
+      "side": "client",
+      "gate": true
+    },
+    {
+      "slug": "modmenu",
+      "kind": "mod",
+      "loader": "fabric",
+      "side": "client",
+      "gate": true
+    },
+    {
+      "slug": "xaeros-minimap",
+      "kind": "mod",
+      "loader": "fabric",
+      "side": "client",
+      "gate": true
+    },
+    {
+      "slug": "xaeros-world-map",
+      "kind": "mod",
+      "loader": "fabric",
+      "side": "client",
+      "gate": true
+    },
+    {
+      "slug": "sodium-extra",
+      "kind": "mod",
+      "loader": "fabric",
+      "side": "client",
+      "gate": false
+    },
+    {
+      "slug": "entityculling",
+      "kind": "mod",
+      "loader": "fabric",
+      "side": "client",
+      "gate": false
+    },
+    {
+      "slug": "complementary-unbound",
+      "kind": "shaderpack",
+      "loader": "iris",
+      "side": "client",
+      "gate": true
+    },
+    {
+      "slug": "rotrblocks",
+      "kind": "resourcepack",
+      "loader": null,
+      "side": "client",
+      "gate": true
+    }
+  ],
+  "disabled_by_policy": [
+    "distanthorizons",
+    "indium",
+    "nvidium",
+    "optifine",
+    "optifabric",
+    "physics-mod",
+    "dynamic-trees",
+    "better-foliage"
+  ]
+}
