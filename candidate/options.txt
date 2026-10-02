@@ -1,0 +1,4 @@
+resourcePacks:["vanilla","file/rotrBLOCKS V88 [2D Foliage] 128x 26.3-1.13.zip"]
+incompatibleResourcePacks:[]
+renderDistance:16
+simulationDistance:10

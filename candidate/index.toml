@@ -1,0 +1,90 @@
+hash-format = "sha256"
+
+[[files]]
+file = "config/iris.properties"
+hash = "271d36e554c947c311b242d49f155c8b4b66bacce212c3b69380f7f037069bed"
+preserve = true
+
+[[files]]
+file = "greencraft-release.json"
+hash = "b423fe1cae3aad53fc2e7da28fc9cb16d01173b363109eff9782fd97089acf40"
+
+[[files]]
+file = "mods/dynamic-fps.pw.toml"
+hash = "423036d40f4fc8feb7af2c1e76e135e17d223b3b10f6aa0202fa8b8bf346aee6"
+metafile = true
+
+[[files]]
+file = "mods/entityculling.pw.toml"
+hash = "c406ea428783615a747b199d49639b48b5d8df470b9116300868d6a1f2b0b07a"
+metafile = true
+
+[[files]]
+file = "mods/fabric-api.pw.toml"
+hash = "9c928c3403c3e16295bebdd1d3f43aea540849a93617cf57cfe7509417b97428"
+metafile = true
+
+[[files]]
+file = "mods/ferrite-core.pw.toml"
+hash = "3f3720d8e319e24fdc572e4b40c48c9bd9dd0124f930befb493a611719adf32b"
+metafile = true
+
+[[files]]
+file = "mods/immediatelyfast.pw.toml"
+hash = "0f9ef287ae1a42f511cc674512518c896ae3106bf27cb4192c7636ba4035ec34"
+metafile = true
+
+[[files]]
+file = "mods/iris.pw.toml"
+hash = "6609fab8d7c6d7b0476d109aefbfb5affdc6bbdd16fb216fb7e58dd9740e44ca"
+metafile = true
+
+[[files]]
+file = "mods/lithium.pw.toml"
+hash = "5db3554a1cf3f2acba5b623428861ab8a4fbd218343c107a670b2d3d13eca814"
+metafile = true
+
+[[files]]
+file = "mods/modmenu.pw.toml"
+hash = "c642c4db3abc3599b03b41e840c1defcc3262733d09bc7ee88c69ee68a165108"
+metafile = true
+
+[[files]]
+file = "mods/placeholder-api.pw.toml"
+hash = "099cb8928996c8bc142fe79e9e60ee5a47cb657d0843000c6ed5c4c883eb58ba"
+metafile = true
+
+[[files]]
+file = "mods/sodium-extra.pw.toml"
+hash = "58fd3625b46749abbd204427047f9ade45e1b77d85d8400622da25aae29267c0"
+metafile = true
+
+[[files]]
+file = "mods/sodium.pw.toml"
+hash = "d00b3a8ffc0f190fe7660fc2b0454ef310b1d776e5a9d130814f663476f0fe30"
+metafile = true
+
+[[files]]
+file = "mods/xaeros-minimap.pw.toml"
+hash = "4c4498c395b6fd5748f37cbe1f478f2a4b1a235f0e307242a7b1eeae6ae60c60"
+metafile = true
+
+[[files]]
+file = "mods/xaeros-world-map.pw.toml"
+hash = "42dfdb93e6881639bbfa87c19bd9355cb0f6e2ccc24748c7126badea8ed6ec4a"
+metafile = true
+
+[[files]]
+file = "options.txt"
+hash = "2d763b8354fa795930678d260a0006f6a3ea77843c826b71f3718eb2cf775faa"
+preserve = true
+
+[[files]]
+file = "resourcepacks/rotrblocks.pw.toml"
+hash = "676e96676bd5508f25b435c4df92a9960dd11e9dbc19feaa8170a65aae652369"
+metafile = true
+
+[[files]]
+file = "shaderpacks/complementary-unbound.pw.toml"
+hash = "2826380a1ebd24e6fa97eb963b4039c878ec402d5078c20f53f00e46866b3a49"
+metafile = true

@@ -1,0 +1,170 @@
+{
+  "schema": 2,
+  "pack": "GreenCraft",
+  "greencraft_version": "2.0.0",
+  "release": "26.3-2.0.0",
+  "minecraft": "26.3",
+  "fabric": "0.19.5",
+  "status": "READY_FOR_GPU",
+  "generated_at_utc": "2026-10-02T22:14:37.961479+00:00",
+  "graphics": {
+    "api": "OpenGL",
+    "shader_required": true,
+    "pbr_required": true,
+    "distant_horizons_enabled": false
+  },
+  "warnings": [],
+  "content": [
+    {
+      "slug": "complementary-unbound",
+      "project_id": "R6NEzAwj",
+      "version_id": "B1kyfoUZ",
+      "version": "r5.9.3",
+      "side": "client",
+      "kind": "shaderpack",
+      "filename": "ComplementaryUnbound_r5.9.3.zip",
+      "top_level": true
+    },
+    {
+      "slug": "dynamic-fps",
+      "project_id": "LQ3K71Q1",
+      "version_id": "Jwq069rR",
+      "version": "3.11.10",
+      "side": "client",
+      "kind": "mod",
+      "filename": "dynamic-fps-3.11.10+minecraft-26.3.0-fabric.jar",
+      "top_level": true
+    },
+    {
+      "slug": "entityculling",
+      "project_id": "NNAgCjsB",
+      "version_id": "F4loCvYt",
+      "version": "1.11.2",
+      "side": "client",
+      "kind": "mod",
+      "filename": "entityculling-fabric-1.11.2-mc26.3.jar",
+      "top_level": true
+    },
+    {
+      "slug": "fabric-api",
+      "project_id": "P7dR8mSH",
+      "version_id": "bNnaTiuM",
+      "version": "0.161.0+26.3",
+      "side": "both",
+      "kind": "mod",
+      "filename": "fabric-api-0.161.0+26.3.jar",
+      "top_level": true
+    },
+    {
+      "slug": "ferrite-core",
+      "project_id": "uXXizFIs",
+      "version_id": "d5ddUdiB",
+      "version": "9.0.0-fabric",
+      "side": "both",
+      "kind": "mod",
+      "filename": "ferritecore-9.0.0-fabric.jar",
+      "top_level": true
+    },
+    {
+      "slug": "immediatelyfast",
+      "project_id": "5ZwdcRci",
+      "version_id": "3MP9UR23",
+      "version": "1.17.1+26.3-fabric",
+      "side": "client",
+      "kind": "mod",
+      "filename": "ImmediatelyFast-Fabric-1.17.1+26.3.jar",
+      "top_level": true
+    },
+    {
+      "slug": "iris",
+      "project_id": "YL57xq9U",
+      "version_id": "vTN4NRGW",
+      "version": "1.11.7+26.3-fabric",
+      "side": "client",
+      "kind": "mod",
+      "filename": "iris-fabric-1.11.7+mc26.3.jar",
+      "top_level": true
+    },
+    {
+      "slug": "lithium",
+      "project_id": "gvQqBUqZ",
+      "version_id": "xS0Q8LSi",
+      "version": "mc26.3-0.26.2-fabric",
+      "side": "both",
+      "kind": "mod",
+      "filename": "lithium-fabric-0.26.2+mc26.3.jar",
+      "top_level": true
+    },
+    {
+      "slug": "modmenu",
+      "project_id": "mOgUt4GM",
+      "version_id": "kyy7dbrZ",
+      "version": "21.0.0",
+      "side": "client",
+      "kind": "mod",
+      "filename": "modmenu-21.0.0.jar",
+      "top_level": true
+    },
+    {
+      "slug": "placeholder-api",
+      "project_id": "eXts2L7r",
+      "version_id": "lXytLqWj",
+      "version": "3.2.0+26.3",
+      "side": "client",
+      "kind": "mod",
+      "filename": "placeholder-api-3.2.0+26.3.jar",
+      "top_level": false
+    },
+    {
+      "slug": "rotrblocks",
+      "project_id": "A8aBf1Xa",
+      "version_id": "cYuAWAwZ",
+      "version": "V88-2D-Foliage",
+      "side": "client",
+      "kind": "resourcepack",
+      "filename": "rotrBLOCKS V88 [2D Foliage] 128x 26.3-1.13.zip",
+      "top_level": true
+    },
+    {
+      "slug": "sodium",
+      "project_id": "AANobbMI",
+      "version_id": "bAZQdGpg",
+      "version": "mc26.3-0.9.2-fabric",
+      "side": "client",
+      "kind": "mod",
+      "filename": "sodium-fabric-0.9.2+mc26.3.jar",
+      "top_level": false
+    },
+    {
+      "slug": "sodium-extra",
+      "project_id": "PtjYWJkn",
+      "version_id": "te2y9qZn",
+      "version": "mc26.3-0.9.4+fabric",
+      "side": "client",
+      "kind": "mod",
+      "filename": "sodium-extra-fabric-0.9.4+mc26.3.jar",
+      "top_level": true
+    },
+    {
+      "slug": "xaeros-minimap",
+      "project_id": "1bokaNcj",
+      "version_id": "YPkAliDt",
+      "version": "fabric-26.3-26.5.3",
+      "side": "client",
+      "kind": "mod",
+      "filename": "xaerominimap-fabric-26.3-26.5.3.jar",
+      "top_level": true
+    },
+    {
+      "slug": "xaeros-world-map",
+      "project_id": "NcUtCpym",
+      "version_id": "UleMm8za",
+      "version": "fabric-26.3-1.46.4",
+      "side": "client",
+      "kind": "mod",
+      "filename": "xaeroworldmap-fabric-26.3-1.46.4.jar",
+      "top_level": true
+    }
+  ],
+  "status_updated_at_utc": "2026-10-02T22:15:21.299329+00:00"
+}
