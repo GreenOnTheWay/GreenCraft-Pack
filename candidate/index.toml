@@ -7,7 +7,7 @@ preserve = true
 
 [[files]]
 file = "greencraft-release.json"
-hash = "405460019ff4dae262e96f9aa37425a9c185ceff6bc9ad2a5c79c063032dc120"
+hash = "1f0ee01105f72b5fa92d6259b45047ef2de81e5f104a58bee70c0508579b7844"
 
 [[files]]
 file = "mods/dynamic-fps.pw.toml"
@@ -76,12 +76,12 @@ metafile = true
 
 [[files]]
 file = "options.txt"
-hash = "2d763b8354fa795930678d260a0006f6a3ea77843c826b71f3718eb2cf775faa"
+hash = "630b7982db48a861956d99a17e5eca4fd15b91ad7d155b92c877f419eb1de123"
 preserve = true
 
 [[files]]
 file = "resourcepacks/rotrblocks.pw.toml"
-hash = "676e96676bd5508f25b435c4df92a9960dd11e9dbc19feaa8170a65aae652369"
+hash = "3ad7ed3478cdbd728336ee3d5a6a7fc2a66945be646c8273c30abe27b8d0ff94"
 metafile = true
 
 [[files]]

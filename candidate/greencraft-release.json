@@ -6,7 +6,7 @@
   "minecraft": "26.3",
   "fabric": "0.19.5",
   "status": "READY_FOR_GPU",
-  "generated_at_utc": "2026-10-03T11:40:21.022947+00:00",
+  "generated_at_utc": "2026-10-03T16:18:09.137065+00:00",
   "graphics": {
     "api": "OpenGL",
     "shader_required": true,
@@ -118,11 +118,11 @@
     {
       "slug": "rotrblocks",
       "project_id": "A8aBf1Xa",
-      "version_id": "cYuAWAwZ",
-      "version": "V88-2D-Foliage",
+      "version_id": "oj59ZjUz",
+      "version": "V88-3D-Foliage",
       "side": "client",
       "kind": "resourcepack",
-      "filename": "rotrBLOCKS V88 [2D Foliage] 128x 26.3-1.13.zip",
+      "filename": "rotrBLOCKS V88 [3D Foliage] 128x 26.3-1.13.zip",
       "top_level": true
     },
     {
@@ -166,5 +166,5 @@
       "top_level": true
     }
   ],
-  "status_updated_at_utc": "2026-10-03T11:41:01.006935+00:00"
+  "status_updated_at_utc": "2026-10-03T16:18:58.023595+00:00"
 }
