@@ -6,7 +6,7 @@
   "minecraft": "26.3",
   "fabric": "0.19.5",
   "status": "READY_FOR_GPU",
-  "generated_at_utc": "2026-10-03T05:19:32.490883+00:00",
+  "generated_at_utc": "2026-10-03T11:40:21.022947+00:00",
   "graphics": {
     "api": "OpenGL",
     "shader_required": true,
@@ -166,5 +166,5 @@
       "top_level": true
     }
   ],
-  "status_updated_at_utc": "2026-10-03T05:20:20.258472+00:00"
+  "status_updated_at_utc": "2026-10-03T11:41:01.006935+00:00"
 }
