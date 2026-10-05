@@ -6,7 +6,7 @@
   "minecraft": "26.3",
   "fabric": "0.19.5",
   "status": "READY_FOR_GPU",
-  "generated_at_utc": "2026-10-05T05:41:08.948604+00:00",
+  "generated_at_utc": "2026-10-05T14:40:24.175674+00:00",
   "graphics": {
     "api": "OpenGL",
     "shader_required": true,
@@ -148,23 +148,23 @@
     {
       "slug": "xaeros-minimap",
       "project_id": "1bokaNcj",
-      "version_id": "YPkAliDt",
-      "version": "fabric-26.3-26.5.3",
+      "version_id": "B2aG1aya",
+      "version": "fabric-26.3-26.6.0",
       "side": "client",
       "kind": "mod",
-      "filename": "xaerominimap-fabric-26.3-26.5.3.jar",
+      "filename": "xaerominimap-fabric-26.3-26.6.0.jar",
       "top_level": true
     },
     {
       "slug": "xaeros-world-map",
       "project_id": "NcUtCpym",
-      "version_id": "UleMm8za",
-      "version": "fabric-26.3-1.46.4",
+      "version_id": "nz9xjzWi",
+      "version": "fabric-26.3-1.47.0",
       "side": "client",
       "kind": "mod",
-      "filename": "xaeroworldmap-fabric-26.3-1.46.4.jar",
+      "filename": "xaeroworldmap-fabric-26.3-1.47.0.jar",
       "top_level": true
     }
   ],
-  "status_updated_at_utc": "2026-10-05T05:41:53.310002+00:00"
+  "status_updated_at_utc": "2026-10-05T14:41:09.356387+00:00"
 }

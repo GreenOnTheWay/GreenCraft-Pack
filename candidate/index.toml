@@ -7,7 +7,7 @@ preserve = true
 
 [[files]]
 file = "greencraft-release.json"
-hash = "7a7976ddb3e4e5c88759bc21665e0c6858e676785abc49f9c4a2412794845001"
+hash = "5a3b57733483eeb6e2a0a2ad97f5f9bcccb56279fc7d3b36c6d03a0a840e4ab9"
 
 [[files]]
 file = "mods/dynamic-fps.pw.toml"
@@ -66,12 +66,12 @@ metafile = true
 
 [[files]]
 file = "mods/xaeros-minimap.pw.toml"
-hash = "4c4498c395b6fd5748f37cbe1f478f2a4b1a235f0e307242a7b1eeae6ae60c60"
+hash = "1cda775755752d68c9baf724ad8a15110d24e193b7b7e5d1d1d05b555f449c28"
 metafile = true
 
 [[files]]
 file = "mods/xaeros-world-map.pw.toml"
-hash = "42dfdb93e6881639bbfa87c19bd9355cb0f6e2ccc24748c7126badea8ed6ec4a"
+hash = "71a4e53d8710a8fb422753e375946318a01b33add487972d1b0071c9ac6bcc22"
 metafile = true
 
 [[files]]
