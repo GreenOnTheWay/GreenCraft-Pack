@@ -7,7 +7,7 @@ preserve = true
 
 [[files]]
 file = "greencraft-release.json"
-hash = "aca86955f889184131230a872886670b22ba55eae853eba040b8baf8f308790d"
+hash = "0511320e75c2f206a7861774cd57af82d67abd0db700b7226f41b82b85f766ee"
 
 [[files]]
 file = "mods/dynamic-fps.pw.toml"
@@ -21,7 +21,7 @@ metafile = true
 
 [[files]]
 file = "mods/fabric-api.pw.toml"
-hash = "9c928c3403c3e16295bebdd1d3f43aea540849a93617cf57cfe7509417b97428"
+hash = "d07e96324106d471b211d9902fd4292b700c3708413d1b420138cadd267c73a4"
 metafile = true
 
 [[files]]
