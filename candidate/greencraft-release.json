@@ -6,7 +6,7 @@
   "minecraft": "26.3",
   "fabric": "0.19.5",
   "status": "READY_FOR_GPU",
-  "generated_at_utc": "2026-10-08T13:30:21.280047+00:00",
+  "generated_at_utc": "2026-10-08T23:21:24.437749+00:00",
   "graphics": {
     "api": "OpenGL",
     "shader_required": true,
@@ -38,11 +38,11 @@
     {
       "slug": "entityculling",
       "project_id": "NNAgCjsB",
-      "version_id": "F4loCvYt",
-      "version": "1.11.2",
+      "version_id": "X1g3VhTx",
+      "version": "1.11.3",
       "side": "client",
       "kind": "mod",
-      "filename": "entityculling-fabric-1.11.2-mc26.3.jar",
+      "filename": "entityculling-fabric-1.11.3-mc26.3.jar",
       "top_level": true
     },
     {
@@ -166,5 +166,5 @@
       "top_level": true
     }
   ],
-  "status_updated_at_utc": "2026-10-08T13:31:02.869006+00:00"
+  "status_updated_at_utc": "2026-10-08T23:22:08.240344+00:00"
 }

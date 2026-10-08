@@ -7,7 +7,7 @@ preserve = true
 
 [[files]]
 file = "greencraft-release.json"
-hash = "4ee804dca3bef8a7e6d57709ac17e32d95306ba57d72017a171f20001a2a96d2"
+hash = "76373d66ebd2a9b54e1db42b981a5bca5927f23a87354c029bc275f0b004b63b"
 
 [[files]]
 file = "mods/dynamic-fps.pw.toml"
@@ -16,7 +16,7 @@ metafile = true
 
 [[files]]
 file = "mods/entityculling.pw.toml"
-hash = "c406ea428783615a747b199d49639b48b5d8df470b9116300868d6a1f2b0b07a"
+hash = "bbd0427e473bda9502b52efbaac4a91b9a4f701db95b86d354390b21f7d56926"
 metafile = true
 
 [[files]]
