@@ -7,7 +7,7 @@ preserve = true
 
 [[files]]
 file = "greencraft-release.json"
-hash = "ddb0498dbc1381e14d814b95a17f1cd84d00b69777c008551e947c718717efaf"
+hash = "061b065490cb187a4339a2df59f450605da0fb93aed3ab46320e1cb6ac3c6878"
 
 [[files]]
 file = "mods/dynamic-fps.pw.toml"
