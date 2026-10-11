@@ -1,0 +1,12 @@
+name = "rotrBLOCKS"
+filename = "rotrBLOCKS V87 [3D Foliage] 128x 26.2-1.13.zip"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/A8aBf1Xa/versions/mPNFFuBE/rotrBLOCKS%20V87%20%5B3D%20Foliage%5D%20128x%2026.2-1.13.zip"
+hash-format = "sha512"
+hash = "37c0cbac4252044fe3cbdad8d1675926d2b8969e45aacc18ba6796f89ecf34ebd4d692bbce91b24046cf51055a2aca03fedbff793ead1f24379012cbd608037d"
+
+[update.modrinth]
+mod-id = "A8aBf1Xa"
+version = "mPNFFuBE"

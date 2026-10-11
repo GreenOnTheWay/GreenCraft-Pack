@@ -5,7 +5,7 @@
   "release": "26.3-2.0.0",
   "minecraft": "26.3",
   "fabric": "0.19.5",
-  "status": "READY_FOR_GPU",
+  "status": "GPU_PASS",
   "generated_at_utc": "2026-10-11T12:50:59.998207+00:00",
   "graphics": {
     "api": "OpenGL",
@@ -166,5 +166,5 @@
       "top_level": true
     }
   ],
-  "status_updated_at_utc": "2026-10-11T12:51:43.095161+00:00"
+  "status_updated_at_utc": "2026-10-11T20:17:36.565480+00:00"
 }
