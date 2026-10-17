@@ -6,9 +6,20 @@ $ErrorActionPreference = "Stop"
 [Console]::OutputEncoding = [Text.Encoding]::UTF8
 
 function Say($m,$c="Gray"){ Write-Host $m -ForegroundColor $c }
+function Invoke-Checked {
+    param([string]$Command, [string[]]$CommandArgs)
+    & $Command @CommandArgs
+    if ($LASTEXITCODE -ne 0) { throw "$Command zakończył się błędem ($LASTEXITCODE). Publikacja przerwana." }
+}
 
 Set-Location $RepoDir
-git pull --ff-only | Out-Host
+if (git status --porcelain) { throw "Repo ma lokalne zmiany. Zapisz je przed testem GPU." }
+Invoke-Checked git @('pull', '--ff-only')
+if ((git branch --show-current) -ne 'main') { throw "Test publikacyjny wymaga gałęzi main." }
+Invoke-Checked python @('-c', 'import sys; assert sys.version_info >= (3,11), "Wymagany Python 3.11+"')
+Invoke-Checked python @('scripts/validate_pack.py', '--require-ci')
+$testedDigest = (Invoke-Checked python @('scripts/validate_pack.py', '--digest')).Trim()
+$testedCommit = (Invoke-Checked git @('rev-parse', 'HEAD')).Trim()
 
 $candidateJson = Join-Path $RepoDir "candidate\greencraft-release.json"
 if (!(Test-Path $candidateJson)) {
@@ -19,8 +30,14 @@ if ($cand.status -notin @("READY_FOR_GPU","GPU_RETRY")) {
     throw "Candidate ma status '$($cand.status)', a nie READY_FOR_GPU."
 }
 
-$ghUser = (& gh api user --jq .login).Trim()
-$packUrl = "https://raw.githubusercontent.com/$ghUser/GreenCraft-Pack/main/candidate/pack.toml"
+$origin = (Invoke-Checked git @('remote', 'get-url', 'origin')).Trim()
+if ($origin -notmatch '^https://github\.com/([^/]+)/GreenCraft-Pack(?:\.git)?$' -and
+    $origin -notmatch '^git@github\.com:([^/]+)/GreenCraft-Pack(?:\.git)?$') {
+    throw "Nieobsługiwany adres repozytorium: $origin"
+}
+$repoOwner = $Matches[1]
+# Immutable commit: an automatic update cannot replace the pack during this test.
+$packUrl = "https://raw.githubusercontent.com/$repoOwner/GreenCraft-Pack/$testedCommit/candidate/pack.toml"
 
 $prism = @(
  "$env:LOCALAPPDATA\Programs\PrismLauncher\prismlauncher.exe",
@@ -43,6 +60,10 @@ $stableInstance = Join-Path $prismRoot "instances\GreenCraft"
 $bootstrap = Join-Path $stableInstance ".minecraft\packwiz-installer-bootstrap.jar"
 if (!(Test-Path $bootstrap)) { throw "Brak packwiz-installer-bootstrap.jar w głównej instancji." }
 Copy-Item $bootstrap (Join-Path $mc "packwiz-installer-bootstrap.jar") -Force
+New-Item -ItemType Directory -Force -Path (Join-Path $mc "config") | Out-Null
+# This is the dedicated test instance; start with this candidate's shader/resource defaults.
+Copy-Item (Join-Path $RepoDir "candidate\options.txt") (Join-Path $mc "options.txt") -Force
+Copy-Item (Join-Path $RepoDir "candidate\config\iris.properties") (Join-Path $mc "config\iris.properties") -Force
 
 # Initial component values are only a seed. packwiz-installer updates mmc-pack.json
 # from candidate/pack.toml before launch.
@@ -82,7 +103,7 @@ Say "Wejdź do dowolnego świata testowego i zostań w nim z shaderem przez oko�
 Say "Walidator sam sprawdzi log Iris/Sodium i wykryje typowe crashe shadera." "Yellow"
 Say ""
 
-Start-Process -FilePath $prism -ArgumentList @("--launch",$testId)
+Start-Process -FilePath $prism -ArgumentList @("--launch",$testId) -WindowStyle Hidden
 
 $deadline = (Get-Date).AddMinutes(5)
 while (!(Test-Path $log) -and (Get-Date) -lt $deadline) { Start-Sleep -Seconds 2 }
@@ -121,20 +142,23 @@ if ($bad -or !$shaderSeen -or !$pipelineSeen) {
     Say "GPU TEST: FAIL" "Red"
     if (!$shaderSeen) { Say "- brak potwierdzenia 'Using shaderpack:'" "Yellow" }
     if (!$pipelineSeen) { Say "- brak potwierdzenia pipeline Iris" "Yellow" }
-    python scripts\set_status.py GPU_RETRY --folder candidate
-    git add candidate
-    git commit -m "GreenCraft: GPU validation failed/retry $($cand.minecraft)" 2>$null
-    git push
+    Invoke-Checked python @('scripts/set_status.py', 'GPU_RETRY', '--folder', 'candidate')
+    Invoke-Checked git @('add', 'candidate')
+    Invoke-Checked git @('commit', '-m', "GreenCraft: GPU validation failed/retry $($cand.minecraft)")
+    Invoke-Checked git @('push', 'origin', 'HEAD:main')
     exit 2
 }
 
 Say ""
 Say "GPU TEST: PASS" "Green"
-python scripts\set_status.py GPU_PASS --folder candidate
-python scripts\promote.py
-git add candidate stable releases
-git commit -m "GreenCraft: promote $($cand.minecraft) after RTX 4070 Ti GPU validation"
-git push
+Invoke-Checked git @('fetch', 'origin', 'main')
+$remoteHead = (Invoke-Checked git @('rev-parse', 'origin/main')).Trim()
+if ($remoteHead -ne $testedCommit) { throw "Repo zmieniło się podczas testu. Pobierz zmiany i powtórz walidację." }
+Invoke-Checked python @('scripts/set_status.py', 'GPU_PASS', '--folder', 'candidate', '--gpu-payload-sha256', $testedDigest)
+Invoke-Checked python @('scripts/promote.py')
+Invoke-Checked git @('add', 'candidate', 'stable', 'releases')
+Invoke-Checked git @('commit', '-m', "GreenCraft: promote $($cand.release) after RTX 4070 Ti GPU validation")
+Invoke-Checked git @('push', 'origin', 'HEAD:main')
 
 Say ""
 Say "GreenCraft $($cand.minecraft) został promowany do STABLE." "Green"

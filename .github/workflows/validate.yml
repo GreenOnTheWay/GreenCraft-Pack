@@ -1,0 +1,48 @@
+name: GreenCraft Validation
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Regression tests
+        run: python -m unittest discover -s tests -v
+      - name: Writer self-test
+        run: python scripts/build_pack.py --self-test
+      - name: Validate existing channels
+        run: |
+          python scripts/validate_pack.py --folder stable
+          python scripts/validate_pack.py --folder candidate
+      - name: Verify published pins and all downloads
+        run: python scripts/validate_pack.py --folder stable --online
+      - name: Build and validate a fresh current-version candidate
+        run: |
+          MC=$(python -c 'import json; print(json.load(open("stable/greencraft-release.json"))["minecraft"])')
+          python scripts/build_pack.py --minecraft "$MC" --output candidate
+          python scripts/validate_pack.py --online
+      - name: Serve fresh candidate
+        run: |
+          python -m http.server 8000 --directory candidate >/tmp/greencraft-http.log 2>&1 &
+          echo $! >/tmp/greencraft-http.pid
+      - name: Dedicated server with pinned Fabric
+        run: bash scripts/server_smoke.sh
+      - name: Validation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: greencraft-pr-validation
+          path: |
+            /tmp/greencraft-server.log
+            /tmp/greencraft-http.log
+          if-no-files-found: ignore
