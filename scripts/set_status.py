@@ -1,16 +1,30 @@
 #!/usr/bin/env python3
-import argparse, json, datetime as dt
-from pathlib import Path
-ROOT = Path(__file__).resolve().parents[1]
-ap = argparse.ArgumentParser()
-ap.add_argument("status")
-ap.add_argument("--folder", default="candidate")
-args = ap.parse_args()
-p = ROOT / args.folder / "greencraft-release.json"
-if not p.exists():
-    raise SystemExit(f"Missing {p}")
-d = json.loads(p.read_text(encoding="utf-8"))
-d["status"] = args.status
-d["status_updated_at_utc"] = dt.datetime.now(dt.timezone.utc).isoformat()
-p.write_text(json.dumps(d, indent=2, ensure_ascii=False), encoding="utf-8")
-print(args.status)
+import argparse
+import datetime as dt
+from build_pack import ROOT, BuildError
+from pack_state import read_release, write_release, refresh, payload_digest, require_ci_evidence
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('status', choices=['CANDIDATE', 'READY_FOR_GPU', 'GPU_RETRY', 'GPU_PASS'])
+    ap.add_argument('--folder', default='candidate')
+    ap.add_argument('--gpu-payload-sha256')
+    args = ap.parse_args()
+    folder = ROOT / args.folder
+    if args.status == 'GPU_PASS':
+        release = require_ci_evidence(folder)
+        if args.gpu_payload_sha256 != payload_digest(folder):
+            raise BuildError('GPU tested payload differs from candidate')
+        release['validation']['gpu_payload_sha256'] = args.gpu_payload_sha256
+    else:
+        release = read_release(folder)
+        release.get('validation', {}).pop('gpu_payload_sha256', None)
+    release.update(status=args.status, status_updated_at_utc=dt.datetime.now(dt.timezone.utc).isoformat())
+    write_release(folder, release)
+    refresh(folder)
+    print(args.status)
+
+
+if __name__ == '__main__':
+    main()

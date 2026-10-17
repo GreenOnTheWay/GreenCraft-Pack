@@ -1,8 +1,8 @@
 {
   "schema": 2,
   "pack": "GreenCraft",
-  "greencraft_version": "2.0.0",
-  "release": "26.3-2.0.0",
+  "greencraft_version": "2.0.1",
+  "release": "26.3-2.0.1",
   "minecraft": "26.3",
   "fabric": "0.19.5",
   "status": "STABLE",
@@ -167,5 +167,6 @@
     }
   ],
   "status_updated_at_utc": "2026-10-11T20:17:36.565480+00:00",
-  "promoted_at_utc": "2026-10-11T20:17:36.850511+00:00"
+  "promoted_at_utc": "2026-10-11T20:17:36.850511+00:00",
+  "manifest_repair": "Exclude mutable release metadata from Packwiz index; content pins unchanged"
 }

@@ -6,10 +6,6 @@ hash = "271d36e554c947c311b242d49f155c8b4b66bacce212c3b69380f7f037069bed"
 preserve = true
 
 [[files]]
-file = "greencraft-release.json"
-hash = "c36227e5d193b35eb093776e727ea6cea681770b5a7e45f1932da1d3c2347a7e"
-
-[[files]]
 file = "mods/dynamic-fps.pw.toml"
 hash = "423036d40f4fc8feb7af2c1e76e135e17d223b3b10f6aa0202fa8b8bf346aee6"
 metafile = true

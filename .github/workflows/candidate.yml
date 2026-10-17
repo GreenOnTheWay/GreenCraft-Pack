@@ -4,112 +4,78 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "17 */6 * * *"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - "policy.json"
+      - ".github/workflows/candidate.yml"
 
 permissions:
   contents: write
   issues: write
 
 concurrency:
-  group: greencraft-candidate
+  group: greencraft-publication
   cancel-in-progress: false
 
 jobs:
   detect-build-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Detect latest stable Minecraft
-        id: detect
-        shell: bash
-        run: |
-          set +e
-          python scripts/check_latest.py | tee /tmp/detect.txt
-          rc=${PIPESTATUS[0]}
-          if [ "$rc" = "0" ]; then
-            echo "new=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          elif [ "$rc" = "10" ]; then
-            mc=$(grep '^NEW_RELEASE=' /tmp/detect.txt | tail -1 | cut -d= -f2)
-            echo "new=true" >> "$GITHUB_OUTPUT"
-            echo "minecraft=$mc" >> "$GITHUB_OUTPUT"
-            exit 0
-          else
-            exit "$rc"
-          fi
+      - name: Unit and regression tests
+        run: python -m unittest discover -s tests -v
 
-      - name: Build Candidate
-        if: steps.detect.outputs.new == 'true'
-        id: build
-        run: |
-          python scripts/build_pack.py \
-            --minecraft "${{ steps.detect.outputs.minecraft }}" \
-            --output candidate \
-            --status CANDIDATE
+      - name: Resolve mod, metadata and Minecraft updates
+        id: prepare
+        run: python scripts/prepare_candidate.py
+
+      - name: Validate all client and server downloads
+        if: steps.prepare.outputs.changed == 'true'
+        run: python scripts/validate_pack.py --online --record
 
       - name: Serve Candidate for packwiz server smoke-test
-        if: steps.detect.outputs.new == 'true'
+        if: steps.prepare.outputs.changed == 'true'
         run: |
           python -m http.server 8000 --directory candidate >/tmp/greencraft-http.log 2>&1 &
           echo $! >/tmp/greencraft-http.pid
 
       - name: Dedicated server smoke-test
-        if: steps.detect.outputs.new == 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-          MC="${{ steps.detect.outputs.minecraft }}"
-          docker pull itzg/minecraft-server:latest
-          docker run -d --name greencraft-server-test \
-            --add-host=host.docker.internal:host-gateway \
-            -e EULA=TRUE \
-            -e TYPE=FABRIC \
-            -e VERSION="$MC" \
-            -e MEMORY=2G \
-            -e PACKWIZ_URL="http://host.docker.internal:8000/pack.toml" \
-            itzg/minecraft-server:latest
+        if: steps.prepare.outputs.changed == 'true'
+        run: bash scripts/server_smoke.sh
 
-          ok=0
-          for i in $(seq 1 72); do
-            logs="$(docker logs greencraft-server-test 2>&1 || true)"
-            if echo "$logs" | grep -Eq 'Done \([0-9.,]+s\)!|Done \(' ; then
-              ok=1
-              break
-            fi
-            state="$(docker inspect -f '{{.State.Running}}' greencraft-server-test 2>/dev/null || echo false)"
-            if [ "$state" != "true" ]; then
-              echo "$logs"
-              exit 1
-            fi
-            sleep 5
-          done
-
-          docker logs greencraft-server-test || true
-          docker rm -f greencraft-server-test || true
-          test "$ok" = "1"
+      - name: Bind server result to tested candidate
+        if: steps.prepare.outputs.changed == 'true'
+        run: python scripts/validate_pack.py --server-pass
 
       - name: Mark ready for real GPU test
-        if: steps.detect.outputs.new == 'true'
+        if: steps.prepare.outputs.changed == 'true'
         run: python scripts/set_status.py READY_FOR_GPU --folder candidate
 
       - name: Publish Candidate
-        if: steps.detect.outputs.new == 'true'
+        if: steps.prepare.outputs.changed == 'true'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add candidate
-          git commit -m "GreenCraft Candidate: Minecraft ${{ steps.detect.outputs.minecraft }}" || true
-          git push
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "GreenCraft: validated automatic candidate update"
+          # Fast-forward only. A concurrent GPU promotion or edit requires rebuilding.
+          git push origin HEAD:main
 
       - name: Optional Discord notification
-        if: steps.detect.outputs.new == 'true' && success()
+        if: steps.prepare.outputs.changed == 'true' && success()
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         shell: bash
@@ -117,11 +83,22 @@ jobs:
           if [ -n "${DISCORD_WEBHOOK:-}" ]; then
             python - <<'PY'
           import json, os, urllib.request
-          msg={"content":"🟩 GreenCraft: Candidate Minecraft ${{ steps.detect.outputs.minecraft }} jest READY_FOR_GPU."}
+          msg={"content":"🟩 GreenCraft: nowa paczka Candidate jest READY_FOR_GPU."}
           req=urllib.request.Request(os.environ["DISCORD_WEBHOOK"],data=json.dumps(msg).encode(),headers={"Content-Type":"application/json"})
           urllib.request.urlopen(req,timeout=15).read()
           PY
           fi
+
+      - name: Preserve validation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: greencraft-validation-${{ github.run_id }}
+          path: |
+            /tmp/greencraft-server.log
+            /tmp/greencraft-http.log
+            candidate/greencraft-release.json
+          if-no-files-found: ignore
 
       - name: Report failure
         if: failure()
