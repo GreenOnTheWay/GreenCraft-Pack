@@ -73,9 +73,7 @@ def fabric_loader(http: Http, mc: str) -> str:
     stable = [x for x in data if x.get("loader", {}).get("stable") is True]
     if stable:
         return str(stable[0]["loader"]["version"])
-    if data:
-        return str(data[0]["loader"]["version"])
-    raise BuildError(f"Fabric Loader has no build for Minecraft {mc}")
+    raise BuildError(f"Fabric Loader has no stable build for Minecraft {mc}")
 
 
 class ModrinthResolver:
@@ -86,6 +84,7 @@ class ModrinthResolver:
         self.version_cache: dict[str, dict] = {}
         self.resolved: dict[str, dict] = {}  # project_id -> record
         self.warnings: list[str] = []
+        self.expanded: set[tuple[str, str]] = set()
 
     def project(self, ident: str) -> dict:
         if ident not in self.project_cache:
@@ -198,6 +197,8 @@ class ModrinthResolver:
             )
         # Dependencies of Fabric mods should be Fabric compatible if a loader list is declared.
         loaders = version.get("loaders") or []
+        if version.get('version_type') != 'release':
+            raise BuildError(f"Required dependency is not a release: {version.get('id')}")
         if loaders and project.get("project_type") == "mod" and "fabric" not in loaders:
             raise BuildError(
                 f"Required dependency {project['slug']} is not a Fabric build: {loaders}"
@@ -205,6 +206,10 @@ class ModrinthResolver:
 
         side = self.inferred_side(project, parent_side)
         rec = self.add_record(project, version, side, "mod", top_level=False)
+        key = (str(version['id']), rec['side'])
+        if key in self.expanded:
+            return
+        self.expanded.add(key)
         for child in version.get("dependencies") or []:
             self.resolve_dependency(child, rec["side"])
 
@@ -328,7 +333,7 @@ def emit_pack(out: Path, mc: str, fabric: str, index_hash: str, release_version:
     (out / "pack.toml").write_text(content, encoding="utf-8", newline="\n")
 
 
-def build(mc_arg: str, output: Path, status: str) -> dict:
+def build(mc_arg: str, output: Path, status: str, pack_version: str | None = None) -> dict:
     http = Http()
     mc = latest_release(http) if mc_arg == "latest" else mc_arg
     fabric = fabric_loader(http, mc)
@@ -405,11 +410,12 @@ def build(mc_arg: str, output: Path, status: str) -> dict:
         options.write_text("\n".join(option_lines) + "\n", encoding="utf-8", newline="\n")
         entries.append({"file": "options.txt", "hash": sha256_file(options), "preserve": True})
 
-        release_version = f"{mc}-{POLICY['pack_version']}"
+        pack_version = pack_version or POLICY['pack_version']
+        release_version = f"{mc}-{pack_version}"
         release = {
             "schema": 2,
             "pack": POLICY["pack_name"],
-            "greencraft_version": POLICY["pack_version"],
+            "greencraft_version": pack_version,
             "release": release_version,
             "minecraft": mc,
             "fabric": fabric,
@@ -421,7 +427,7 @@ def build(mc_arg: str, output: Path, status: str) -> dict:
         }
         relfile = temp / "greencraft-release.json"
         relfile.write_text(json.dumps(release, indent=2, ensure_ascii=False), encoding="utf-8", newline="\n")
-        entries.append({"file": "greencraft-release.json", "hash": sha256_file(relfile)})
+        # Mutable status/control metadata is fetched separately, never installed by Packwiz.
 
         index_hash = emit_index(temp, entries)
         emit_pack(temp, mc, fabric, index_hash, release_version)
@@ -469,6 +475,7 @@ def main() -> int:
     ap.add_argument("--output", default="candidate")
     ap.add_argument("--status", default="CANDIDATE")
     ap.add_argument("--self-test", action="store_true")
+    ap.add_argument("--pack-version")
     args = ap.parse_args()
 
     if args.self_test:
@@ -476,7 +483,7 @@ def main() -> int:
 
     out = (ROOT / args.output).resolve()
     try:
-        release = build(args.minecraft, out, args.status)
+        release = build(args.minecraft, out, args.status, args.pack_version)
         print(json.dumps(release, indent=2, ensure_ascii=False))
         return 0
     except BuildError as e:
