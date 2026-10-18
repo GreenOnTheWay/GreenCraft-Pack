@@ -16,6 +16,11 @@ Set-Location $RepoDir
 if (git status --porcelain) { throw "Repo ma lokalne zmiany. Zapisz je przed testem GPU." }
 Invoke-Checked git @('pull', '--ff-only')
 if ((git branch --show-current) -ne 'main') { throw "Test publikacyjny wymaga gałęzi main." }
+. (Join-Path $PSScriptRoot 'gpu_state.ps1')
+if (Test-PublishedCandidate $RepoDir) {
+    Say "Ten kandydat przeszedl test GPU i jest juz opublikowany jako STABLE. Nie ma nowej paczki do testowania." "Green"
+    exit 0
+}
 Invoke-Checked python @('-c', 'import sys; assert sys.version_info >= (3,11), "Wymagany Python 3.11+"')
 Invoke-Checked python @('scripts/validate_pack.py', '--require-ci')
 $testedDigest = (Invoke-Checked python @('scripts/validate_pack.py', '--digest')).Trim()
