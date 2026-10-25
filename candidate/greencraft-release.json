@@ -1,12 +1,12 @@
 {
   "schema": 2,
   "pack": "GreenCraft",
-  "greencraft_version": "2.0.5",
-  "release": "26.3-2.0.5",
+  "greencraft_version": "2.0.6",
+  "release": "26.3-2.0.6",
   "minecraft": "26.3",
   "fabric": "0.20.1",
   "status": "READY_FOR_GPU",
-  "generated_at_utc": "2026-10-23T11:39:55.436583+00:00",
+  "generated_at_utc": "2026-10-25T16:20:26.741226+00:00",
   "graphics": {
     "api": "OpenGL",
     "shader_required": true,
@@ -148,32 +148,32 @@
     {
       "slug": "xaeros-minimap",
       "project_id": "1bokaNcj",
-      "version_id": "eUEhnw8G",
-      "version": "fabric-26.3-26.6.1",
+      "version_id": "MfxfgXaO",
+      "version": "fabric-26.3-26.6.2",
       "side": "client",
       "kind": "mod",
-      "filename": "xaerominimap-fabric-26.3-26.6.1.jar",
+      "filename": "xaerominimap-fabric-26.3-26.6.2.jar",
       "top_level": true
     },
     {
       "slug": "xaeros-world-map",
       "project_id": "NcUtCpym",
-      "version_id": "IEtfiHVq",
-      "version": "fabric-26.3-1.47.1",
+      "version_id": "VM8lNSSM",
+      "version": "fabric-26.3-1.47.2",
       "side": "client",
       "kind": "mod",
-      "filename": "xaeroworldmap-fabric-26.3-1.47.1.jar",
+      "filename": "xaeroworldmap-fabric-26.3-1.47.2.jar",
       "top_level": true
     }
   ],
   "validation": {
-    "payload_sha256": "18378aaf58592603024f994a3b2fb2295c18185469880cf7ef9b183deca44bc2",
+    "payload_sha256": "3eef04ace7849466786c2a7a8cbdb197a74deadea82367c679e8bb5d3dbfdff6",
     "metadata": true,
     "downloads": true,
     "base_stable_sha256": "3e3bffe41ebbb1455540be1b37d19c591a879aa1c3d926bfe3f09f146ea94fce",
     "server": true,
-    "checked_at_utc": "2026-10-23T11:40:01.978914+00:00",
-    "run_url": "https://github.com/GreenOnTheWay/GreenCraft-Pack/actions/runs/39947631190"
+    "checked_at_utc": "2026-10-25T16:20:44.174828+00:00",
+    "run_url": "https://github.com/GreenOnTheWay/GreenCraft-Pack/actions/runs/40211171258"
   },
-  "status_updated_at_utc": "2026-10-23T11:40:49.244079+00:00"
+  "status_updated_at_utc": "2026-10-25T16:21:31.625562+00:00"
 }
