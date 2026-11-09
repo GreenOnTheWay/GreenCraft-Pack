@@ -1,12 +1,12 @@
 {
   "schema": 2,
   "pack": "GreenCraft",
-  "greencraft_version": "2.0.9",
-  "release": "26.3-2.0.9",
+  "greencraft_version": "2.0.10",
+  "release": "26.3-2.0.10",
   "minecraft": "26.3",
   "fabric": "0.20.1",
   "status": "READY_FOR_GPU",
-  "generated_at_utc": "2026-11-03T14:15:11.711619+00:00",
+  "generated_at_utc": "2026-11-09T22:22:19.740730+00:00",
   "graphics": {
     "api": "OpenGL",
     "shader_required": true,
@@ -48,11 +48,11 @@
     {
       "slug": "fabric-api",
       "project_id": "P7dR8mSH",
-      "version_id": "nJlcvFfj",
-      "version": "0.165.2+26.3",
+      "version_id": "998R2rNP",
+      "version": "0.166.0+26.3",
       "side": "both",
       "kind": "mod",
-      "filename": "fabric-api-0.165.2+26.3.jar",
+      "filename": "fabric-api-0.166.0+26.3.jar",
       "top_level": true
     },
     {
@@ -167,13 +167,13 @@
     }
   ],
   "validation": {
-    "payload_sha256": "9ad9034f8d8491d4c2f4b18c96666921a7393cc9505467b14897a8a7c81dece6",
+    "payload_sha256": "57c1c3498d8972f5fbf82324bdc8053ef6fb921d49a63d905f8a05b289f9ecf1",
     "metadata": true,
     "downloads": true,
     "base_stable_sha256": "3e3bffe41ebbb1455540be1b37d19c591a879aa1c3d926bfe3f09f146ea94fce",
     "server": true,
-    "checked_at_utc": "2026-11-03T14:15:20.144316+00:00",
-    "run_url": "https://github.com/GreenOnTheWay/GreenCraft-Pack/actions/runs/41651801815"
+    "checked_at_utc": "2026-11-09T22:22:36.377752+00:00",
+    "run_url": "https://github.com/GreenOnTheWay/GreenCraft-Pack/actions/runs/42711230349"
   },
-  "status_updated_at_utc": "2026-11-03T14:16:06.309092+00:00"
+  "status_updated_at_utc": "2026-11-09T22:23:21.476189+00:00"
 }
