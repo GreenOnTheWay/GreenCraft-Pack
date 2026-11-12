@@ -1,12 +1,12 @@
 {
   "schema": 2,
   "pack": "GreenCraft",
-  "greencraft_version": "2.0.11",
-  "release": "26.3-2.0.11",
+  "greencraft_version": "2.0.12",
+  "release": "26.3-2.0.12",
   "minecraft": "26.3",
   "fabric": "0.20.1",
   "status": "READY_FOR_GPU",
-  "generated_at_utc": "2026-11-11T19:36:16.016309+00:00",
+  "generated_at_utc": "2026-11-12T19:54:37.939390+00:00",
   "graphics": {
     "api": "OpenGL",
     "shader_required": true,
@@ -38,11 +38,11 @@
     {
       "slug": "entityculling",
       "project_id": "NNAgCjsB",
-      "version_id": "X1g3VhTx",
-      "version": "1.11.3",
+      "version_id": "fD6iRzOi",
+      "version": "1.12.0",
       "side": "client",
       "kind": "mod",
-      "filename": "entityculling-fabric-1.11.3-mc26.3.jar",
+      "filename": "entityculling-fabric-1.12.0-mc26.3.jar",
       "top_level": true
     },
     {
@@ -98,11 +98,11 @@
     {
       "slug": "modmenu",
       "project_id": "mOgUt4GM",
-      "version_id": "kyy7dbrZ",
-      "version": "21.0.0",
+      "version_id": "xckkBHD5",
+      "version": "21.0.1",
       "side": "client",
       "kind": "mod",
-      "filename": "modmenu-21.0.0.jar",
+      "filename": "modmenu-21.0.1.jar",
       "top_level": true
     },
     {
@@ -167,13 +167,13 @@
     }
   ],
   "validation": {
-    "payload_sha256": "90b30445187f6f9f6500d98d201531eb85f1e523004b6c3b362b832a0c75d05d",
+    "payload_sha256": "52f0a05579a1769ca000206132cafd9fa563d75d89bf9a3a0912772c491de9fc",
     "metadata": true,
     "downloads": true,
     "base_stable_sha256": "3e3bffe41ebbb1455540be1b37d19c591a879aa1c3d926bfe3f09f146ea94fce",
     "server": true,
-    "checked_at_utc": "2026-11-11T19:36:37.561870+00:00",
-    "run_url": "https://github.com/GreenOnTheWay/GreenCraft-Pack/actions/runs/43088701612"
+    "checked_at_utc": "2026-11-12T19:55:03.918412+00:00",
+    "run_url": "https://github.com/GreenOnTheWay/GreenCraft-Pack/actions/runs/43294894928"
   },
-  "status_updated_at_utc": "2026-11-11T19:37:22.697758+00:00"
+  "status_updated_at_utc": "2026-11-12T19:55:50.552094+00:00"
 }

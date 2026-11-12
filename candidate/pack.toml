@@ -1,12 +1,12 @@
 name = "GreenCraft"
 author = "GreenOnTheWay"
-version = "26.3-2.0.11"
+version = "26.3-2.0.12"
 pack-format = "packwiz:1.1.0"
 
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "c8dfb4c0008a67e6b6ab96e1eed194197b22120bbcb1c6d2f9248baeaa4b8a0a"
+hash = "966045944b7e3e4c0df8805b76f064c71ccd50a38dae0b71d27470a9e52fed0d"
 
 [versions]
 minecraft = "26.3"
